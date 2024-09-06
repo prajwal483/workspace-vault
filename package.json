@@ -1,0 +1,29 @@
+{
+  "name": "turborepo-shadcn-ui",
+  "version": "0.1.1",
+  "private": true,
+  "scripts": {
+    "build": "turbo dotenv -e .env -- run build",
+    "dev": "dotenv -e .env -- turbo run dev",
+    "lint": "turbo run lint",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "ui:add": "pnpm --filter ui ui:add",
+    "web:add": "pnpm --filter web web:add",
+    "crypto:add": "pnpm --filter cryptography crypto:add",
+    "db:generate": "pnpm --filter database db:generate",
+    "db:migrate": "pnpm --filter database db:migrate",
+    "db:add": "pnpm --filter database db:add"
+  },
+  "devDependencies": {
+    "@turbo/gen": "^1.9.7",
+    "@types/node": "^20.8.4",
+    "eslint": "^7.32.0",
+    "eslint-config-custom": "workspace:*",
+    "prettier": "^2.5.1",
+    "turbo": "latest"
+  },
+  "packageManager": "pnpm@7.15.0",
+  "dependencies": {
+    "dotenv-cli": "^7.3.0"
+  }
+}

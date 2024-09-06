@@ -1,0 +1,66 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "globalDependencies": ["**/.env.*local"],
+  "globalEnv": [
+    "NODE_ENV",
+    "RP_NAME",
+    "RP_ID",
+    "RP_ORIGIN",
+    "REDIS_TOKEN",
+    "REDIS_URL",
+    "DATABASE_URL",
+    "GITHUB_CLIENT_ID",
+    "GITHUB_CLIENT_SECRET",
+    "WEBAUTH_SECRET",
+    "NEXT_PUBLIC_WEB_AUTH_SECRET",
+    "BASE_URL"
+  ],
+  "globalDotEnv": [".env"],
+  "pipeline": {
+    "db:generate": {
+      "cache": false
+    },
+    "db:push": {
+      "cache": false
+    },
+    "db:studio": {
+      "cache": false
+    },
+    "lint": {},
+    "dev": {
+      "dependsOn": ["^db:generate"],
+      "cache": false,
+      "persistent": true,
+      "dotEnv": [
+        ".env.production.local",
+        ".env.local",
+        ".env.production",
+        ".env"
+      ]
+    },
+    "build": {
+      "dependsOn": ["^db:generate", "^build"],
+      "outputs": [".next/**", "!.next/cache/**"],
+      "dotEnv": [
+        ".env.production.local",
+        ".env.local",
+        ".env.production",
+        ".env"
+      ],
+      "env": [
+        "NODE_ENV",
+        "RP_NAME",
+        "RP_ID",
+        "RP_ORIGIN",
+        "REDIS_TOKEN",
+        "REDIS_URL",
+        "DATABASE_URL",
+        "GITHUB_CLIENT_ID",
+        "GITHUB_CLIENT_SECRET",
+        "WEBAUTH_SECRET",
+        "NEXT_PUBLIC_WEB_AUTH_SECRET",
+        "BASE_URL"
+      ]
+    }
+  }
+}
